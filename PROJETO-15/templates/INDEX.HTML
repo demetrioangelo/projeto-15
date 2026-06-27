@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flores Online - Contato</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <style>
+        .erro {
+            color: #dc3545;
+            font-size: 0.9rem;
+            margin-top: -0.8rem;
+            margin-bottom: 0.8rem;
+            display: block;
+        }
+        .campo-erro {
+            border-color: #dc3545 !important;
+        }
+        .mensagem-flash {
+            padding: 1rem;
+            border-radius: 8px;
+            margin-bottom: 1rem;
+        }
+        .mensagem-flash.sucesso {
+            background: #d4edda;
+            border: 1px solid #28a745;
+            color: #155724;
+        }
+    </style>
+</head>
+<body>
+    <main>
+        <section>
+            <h2>🌺 Flores Online</h2>
+            <h3 style="text-align: center; color: #666; margin-bottom: 2rem;">📧 Entre em Contato</h3>
+            
+            <!-- Pega erros e dados da sessão -->
+            {% set erros = session.pop('erros', {}) %}
+            {% set dados = session.pop('dados', {}) %}
+            
+            <form action="{{ url_for('enviar') }}" method="POST">
+                <!-- CAMPO NOME -->
+                <label for="nome">Seu nome:</label>
+                <input type="text" id="nome" name="nome" 
+                       placeholder="Digite seu nome completo"
+                       value="{{ dados.get('nome', '') }}"
+                       class="{{ 'campo-erro' if erros.get('nome') else '' }}">
+                {% if erros.get('nome') %}
+                    <span class="erro">{{ erros.get('nome') }}</span>
+                {% endif %}
+                
+                <!-- CAMPO E-MAIL -->
+                <label for="email">Seu e-mail:</label>
+                <input type="email" id="email" name="email"
+                       placeholder="exemplo@email.com"
+                       value="{{ dados.get('email', '') }}"
+                       class="{{ 'campo-erro' if erros.get('email') else '' }}">
+                {% if erros.get('email') %}
+                    <span class="erro">{{ erros.get('email') }}</span>
+                {% endif %}
+                
+                <!-- CAMPO TELEFONE -->
+                <label for="telefone">Telefone (opcional):</label>
+                <input type="tel" id="telefone" name="telefone"
+                       placeholder="(11) 99999-9999"
+                       value="{{ dados.get('telefone', '') }}"
+                       class="{{ 'campo-erro' if erros.get('telefone') else '' }}">
+                {% if erros.get('telefone') %}
+                    <span class="erro">{{ erros.get('telefone') }}</span>
+                {% endif %}
+                
+                <!-- CAMPO MENSAGEM -->
+                <label for="mensagem">Sua mensagem:</label>
+                <textarea id="mensagem" name="mensagem" rows="5"
+                          placeholder="Digite sua mensagem aqui..."
+                          class="{{ 'campo-erro' if erros.get('mensagem') else '' }}">{{ dados.get('mensagem', '') }}</textarea>
+                {% if erros.get('mensagem') %}
+                    <span class="erro">{{ erros.get('mensagem') }}</span>
+                {% endif %}
+                
+                <!-- BOTÃO ENVIAR -->
+                <button type="submit">📨 Enviar Mensagem</button>
+            </form>
+            
+            <!-- RODAPÉ DO FORMULÁRIO -->
+            <div style="margin-top: 1.5rem; text-align: center; color: #999; font-size: 0.9rem;">
+                <p>🔒 Suas informações estão seguras conosco.</p>
+            </div>
+        </section>
+    </main>
+</body>
+</html>

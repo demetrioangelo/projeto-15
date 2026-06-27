@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mensagem Enviada! - Flores Online</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <style>
+        .sucesso {
+            text-align: center;
+            padding: 3rem;
+            background: linear-gradient(135deg, #d4edda, #b7e4c7);
+            border: 2px solid #28a745;
+            border-radius: 20px;
+            margin: 0 auto;
+            max-width: 600px;
+            animation: aparecer 0.5s ease;
+        }
+        
+        .sucesso h2 {
+            color: #155724;
+            font-size: 2rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        .sucesso h2::after {
+            display: none;
+        }
+        
+        .icone-sucesso {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+            display: block;
+        }
+        
+        .sucesso p {
+            color: #155724;
+            font-size: 1.1rem;
+            margin-bottom: 2rem;
+        }
+        
+        .sucesso a {
+            display: inline-block;
+            padding: 0.8rem 2.5rem;
+            background: linear-gradient(135deg, #28a745, #1e7e34);
+            color: white;
+            text-decoration: none;
+            border-radius: 10px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+        
+        .sucesso a:hover {
+            transform: scale(1.05);
+            box-shadow: 0 8px 25px rgba(40, 167, 69, 0.3);
+        }
+        
+        @keyframes aparecer {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .detalhes {
+            margin-top: 2rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid rgba(21, 87, 36, 0.2);
+            color: #155724;
+            font-size: 0.9rem;
+        }
+    </style>
+</head>
+<body>
+    <main>
+        <div class="sucesso">
+            <span class="icone-sucesso">🌺</span>
+            <h2>✅ {{ mensagem }}</h2>
+            <p>🌿 Agradecemos seu contato! Em breve retornaremos com mais informações sobre nossas flores.</p>
+            <a href="{{ url_for('inicio') }}">🏠 Voltar para a página inicial</a>
+            
+            <div class="detalhes">
+                <p>📅 Enviado em: {{ agora.strftime('%d/%m/%Y às %H:%M') }}</p>
+            </div>
+        </div>
+    </main>
+</body>
+</html>
